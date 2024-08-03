@@ -1,38 +1,77 @@
-# create-svelte
+## Entwicklen
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Development Server starten:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Bauen
 
-To create a production version of your app:
+Production Server bauen:
 
 ```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+Preview vom Production Server starten:
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```bash
+npm run preview
+```
+
+## Deployen
+
+Production Server starten:
+
+Wichtig ist eine ENV-File mitzugeben, um die DB und die Ablage der Dateien zu konfigurieren
+
+```bash
+node --env-file=<file> build
+```
+
+## Prisma (ORM)
+
+Benutzeroberfläche für die DB
+
+```bash
+npx prisma studio
+```
+
+Änderungen migrieren
+
+```bash
+npx prisma migrate dev --name <name>
+```
+
+Client generieren
+
+```bash
+npx prisma generate
+```
+
+## Environment Variablen
+
+### DATABASE_URL
+
+Für die Prisma DB
+
+### HOST | PORT | ORIGIN
+
+https://kit.svelte.dev/docs/adapter-node#environment-variables
+
+## Auslieferung
+
+- /build
+- /node_modules <- generieren mit npm ci --omit dev / dann den generierten Prisma Client aus Projekt reintun, also /node_modules/.prisma
+- /photos <- benamen wie man will und dann in env File eintragen
+- /prisma <- schema.prisma und migrations Ordner sind wichtig
+- .env <- Config
+- package.json
+- package-lock.json
+
+## DB befüllen
+
+```bash
+npx prisma migrate deploy
+```
